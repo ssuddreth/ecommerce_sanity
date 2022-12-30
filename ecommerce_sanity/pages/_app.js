@@ -8,7 +8,7 @@ import { StateContext } from '../context/StateContext';
 function MyApp({ Component, pageProps }) {
   return (
     <StateContext>
-      <Layout>
+      <Layout >
         <Toaster />
         <Component {...pageProps} />
       </Layout>
