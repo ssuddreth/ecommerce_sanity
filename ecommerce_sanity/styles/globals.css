@@ -748,7 +748,7 @@ span.text-red {
 
 @media screen and (max-width:800px) {
   .hero-banner-container {
-    height: 560px;
+    height: 550px;
   }
 
   .hero-banner-image {
@@ -765,8 +765,8 @@ span.text-red {
   }
 
   .footer-banner-image {
-    width: 67%;
-    left: 33%;
+    width: 57%;
+    left: 43%;
     top: 0%;
     height: auto;
     opacity: 0.4;
@@ -830,7 +830,7 @@ span.text-red {
   }
 
   .cart-container {
-    width: 415px;
+    width: 100vw;
     padding: 4px;
   }
 
