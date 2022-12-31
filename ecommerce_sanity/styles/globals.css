@@ -831,6 +831,7 @@ span.text-red {
 
   .cart-container {
     width: 395px;
+    height: 99vh;
     padding: 4px;
   }
 
