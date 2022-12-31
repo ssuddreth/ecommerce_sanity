@@ -10,6 +10,7 @@ const Success = () => {
 
     useEffect(() => {
         localStorage.clear();
+        sessionStorage.clear();
         setCartItems([]);
         setTotalPrice(0);
         setTotalQuantities(0);
