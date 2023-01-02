@@ -35,6 +35,12 @@ export default {
         name: 'details',
         title: 'Details',
         type: 'string',
+      },
+      { 
+        name: 'size',
+        title: 'Size',
+        type: 'array',
+        of: [{ type: 'string' }],
       }
     ]
   }
