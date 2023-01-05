@@ -35,11 +35,13 @@ export const StateContext = ({ children }) => {
         }
     }, [cartItems]);
 
-    const onAdd = (product, quantity) => {
+    const onAdd = (product, quantity, size) => {
         const checkProductInCart = cartItems.find((item) => item._id === product._id);
 
         setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
         setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
+
+        product.selectedSize = size;
 
         if (checkProductInCart) {
             const updatedCartItems = cartItems.map((cartProduct) => {
@@ -52,11 +54,11 @@ export const StateContext = ({ children }) => {
             setCartItems(updatedCartItems);
         } else {
             product.quantity = quantity;
-
             setCartItems([...cartItems, { ...product }]);
         }
 
         toast.success(`${qty} ${product.name} added to your bag.`, {duration: 900});
+        console.log(product);
     }
 
     const onRemove = (product) => {

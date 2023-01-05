@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 import { client, urlFor } from '../../lib/client';
@@ -6,15 +6,32 @@ import { Product } from '../../components';
 import { useStateContext } from '../../context/StateContext';
 
 const ProductDetails = ({ product, products }) => {
-    const { image, name, details, price } = product;
+    const { image, name, details, price, size } = product;
     const [index, setIndex] = useState(0);
-    const { setQuantity, decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
+    const [sze, setSze] = useState(size[0]);
+    const { setQuantity, decQty, incQty, qty, onAdd, setShowCart, cartItems } = useStateContext();
 
     const handleBuyNow = () => {
         onAdd(product, qty);
 
         setShowCart(true);
     }
+
+    const reset = () => {
+        let dropDown = document.getElementById("sizes");
+        dropDown.selectedIndex = 0;
+    }
+
+    useEffect(() => {
+        let dropDown = document.getElementById("sizes");
+        let ind = dropDown.selectedIndex;
+        if (sze !== dropDown.options[ind].value) {
+            setSze(dropDown.options[ind].value);
+        }
+        //console.log(dropDown.options[ind].value);
+        /*console.log(sze);
+        console.log(qty);*/
+    })
 
     return (
         <div>
@@ -48,10 +65,19 @@ const ProductDetails = ({ product, products }) => {
                             <span className="plus" onClick={incQty}><AiOutlinePlus /></span>
                         </p>
                     </div>
+                    <div className="quantity">
+                        <label className="product-detail-desc" style={{ fontWeight: 'bold', fontSize: 18 }} for="sizes">Choose a size:</label>
+                        <select name="sizes" id="sizes" onChange={(e) => setSze(e.target.value)}>
+                            {size.map((item) => (
+                                <option value={item}>{item}</option>
+                            ))}
+                        </select>
+                    </div>
                     <div className="buttons">
                         <button type="button" className="add-to-cart" onClick={() => {
-                            onAdd(product, qty);
+                            onAdd(product, qty, sze);
                             setQuantity(1);
+                            reset();
                         }}>Add to Bag</button>
                         <button type="button" className="buy-now" onClick={handleBuyNow}>Buy Now</button>
                     </div>
